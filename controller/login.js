@@ -8,7 +8,7 @@ async function login(req, res) {
   if (!email || !password) {
     return res
       .status(400)
-      .json({ message: "Vui lòng cung cấp email và mật khẩu.", ok: false });
+      .json({ message: "Please provider email and password", ok: false });
   }
 
   try {
@@ -20,7 +20,7 @@ async function login(req, res) {
     if (rows.length === 0) {
       return res
         .status(401)
-        .json({ message: "Email hoặc mật khẩu không đúng.", ok: false });
+        .json({ message: "Email or password is incorrect", ok: false });
     }
 
     const user = rows[0];
@@ -30,7 +30,7 @@ async function login(req, res) {
     if (!passwordMatch) {
       return res
         .status(401)
-        .json({ message: "Email hoặc mật khẩu không đúng.", ok: false });
+        .json({ message: "Email or password is incorrect", ok: false });
     }
 
     // Tạo token JWT
@@ -45,7 +45,7 @@ async function login(req, res) {
     res.status(200).json({ token, ok: true, uid: user.id });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: "Đã có lỗi xảy ra.", ok: false });
+    res.status(500).json({ message: "Internal server error", ok: false });
   }
 }
 
