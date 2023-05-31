@@ -4,6 +4,21 @@ const http= require("http");
 const router = require("./route/route");
 
 require('dotenv').config();
+const fs = require('fs');
+
+const folderPath = './uploads';
+
+fs.readdir(folderPath, (err, files) => {
+  if (err) {
+    console.error('Lỗi khi đọc thư mục:', err);
+    return;
+  }
+
+  console.log('Danh sách các ảnh trong thư mục:');
+  files.forEach((file) => {
+    console.log(file);
+  });
+});
 
 const app = express();
 const httpServer= http.createServer(app)
